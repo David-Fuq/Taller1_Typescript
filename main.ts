@@ -1,21 +1,30 @@
-import { Serie } from "./serie";
+import { Serie } from "./serie.js";
+import { series } from "./data.js";
 
-const seriesTbody: HTMLElement = document.getElementById('series')!; // Nodo tbody que tiene el id="courses"
+const seriesTbody: HTMLElement = document.getElementById('series')!; 
 
-function renderCoursesInTable(series: Serie[]): void {
+function renderSeriesInTable(series: Serie[]): void {
+  console.log("Desplegando series en la tabla");
   series.forEach(c => {
-    let trElement = document.createElement("tr");
-    trElement.innerHTML = `<td>${c.name}</td>
+    let trElement: HTMLElement = document.createElement("tr");
+    trElement.innerHTML = `<td>${c.id}</td>
+                           <td>${c.name}</td>
                            <td>${c.channel}</td>
                            <td>${c.seasons}</td>`;
     seriesTbody.appendChild(trElement);
   });
 }
 
-function getAverageSeason(series: Serie[]): number {
+function getAverageSeason(series: Serie[]): void {
     let totalCredits: number = 0;
     let totalSeries: number = 0;
     series.forEach((serie) => totalCredits = totalCredits + serie.seasons);
     series.forEach((serie) => totalSeries = totalSeries + 1);
-    return totalCredits/totalSeries;
+    const avr= totalCredits/totalSeries;
+    let table: HTMLElement = document.getElementById('tabla')!;
+    const html= '<p> &nbsp; Seasons average: '+avr+'</p>'
+    table.insertAdjacentHTML('afterend', html)
   }
+
+renderSeriesInTable(series);
+getAverageSeason(series);

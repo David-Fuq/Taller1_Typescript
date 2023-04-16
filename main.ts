@@ -7,8 +7,8 @@ function renderSeriesInTable(series: Serie[]): void {
   console.log("Desplegando series en la tabla");
   series.forEach(c => {
     let trElement: HTMLElement = document.createElement("tr");
-    trElement.innerHTML = `<td>${c.id}</td>
-                           <td>${c.name}</td>
+    trElement.innerHTML = `<td><b>${c.id}</b></td>
+                           <td><a href=${c.url}>${c.name}</a></td>
                            <td>${c.channel}</td>
                            <td>${c.seasons}</td>`;
     seriesTbody.appendChild(trElement);
